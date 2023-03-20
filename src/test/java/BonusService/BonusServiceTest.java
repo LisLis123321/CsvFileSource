@@ -3,6 +3,7 @@ package BonusService;
 import org.example.BonusService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,8 +13,8 @@ class BonusServiceTest {
     @ParameterizedTest
     @CsvSource(
             value = {
-                    "'registered, under limit', 100060, true, 30",
-                    "'not registered, under limit', 100060, false,10"
+                    "registered under limit, 100060, true, 30",
+                    "registered under limit, 100060, false,10"
             },
             delimiter = ','
 
@@ -28,8 +29,8 @@ class BonusServiceTest {
     @ParameterizedTest
     @CsvSource(
             value = {
-                    "'registered, over limit', 100060, true, 30",
-                    "'not registered, over limit', 100060, false,10"
+                    "egistered over limit , 100060 , true , 30",
+                    "registered over limit , 100060 , false , 10"
             },
             delimiter = ','
 
@@ -39,5 +40,13 @@ class BonusServiceTest {
 
         long actual = service.calculate(amount, registered);
         assertEquals(expected,actual);
+    }
+    @ParameterizedTest
+    @CsvFileSource(resources = "/data.csv", numLinesToSkip = 1)
+void shouldCalculateTesting(String limit, long amount, boolean registered, int percent) {
+        System.out.println("limit" + limit);
+        System.out.println("amount" + amount);
+        System.out.println("registered" + registered);
+        System.out.println("percent" + percent);
     }
 }

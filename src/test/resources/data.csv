@@ -1,0 +1,3 @@
+limit , amount , registered , percent
+registered under limit, 100060, true, 30
+registered under limit, 100060, false,10
