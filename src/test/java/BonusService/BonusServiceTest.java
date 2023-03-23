@@ -43,10 +43,9 @@ class BonusServiceTest {
     }
     @ParameterizedTest
     @CsvFileSource(resources = "/data.csv", numLinesToSkip = 1)
-void shouldCalculateTesting(String limit, long amount, boolean registered, int percent) {
-        System.out.println("limit" + limit);
-        System.out.println("amount" + amount);
-        System.out.println("registered" + registered);
-        System.out.println("percent" + percent);
+void shouldCalculateTesting(String limit, long amount, boolean registered, int expected) {
+        BonusService service = new BonusService();
+        long actual = service.calculate(amount, registered);
+        assertEquals(expected,actual);
     }
 }
